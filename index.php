@@ -2,10 +2,11 @@
 include 'session.php';
 include 'conn.php';
 include 'functions/getStats.function.php';
+include 'functions/updateLogs.function.php';
 
 $stats = getStats($conn);
 
-if(count($stats) > 7 && $stats[0] > 0){
+if(is_array($stats) && count($stats) > 7 && $stats[0] > 0){
 $totalMachines = $stats[0];
 $totalOnline = $stats[1];
 $totalAdmins = $stats[2];
@@ -20,7 +21,8 @@ $Server2008Percentage = 100 * $stats[5] / $totalMachines;
 $Windows10Percentage = 100 * $stats[6] / $totalMachines;
 $Windows8Percentage = 100 * $stats[7] / $totalMachines;
 }
-else{
+else{ 
+  updateLogs($conn, "Error", "An error occured while retrieving stats", " ", " ", " ");
   $totalMachines = 0;
   $totalOnline = 0;
   $totalAdmins = 0;

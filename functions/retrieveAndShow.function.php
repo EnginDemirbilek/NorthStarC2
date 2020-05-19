@@ -3,7 +3,7 @@
 
 function cleanSlaveCommand($str, $conn)
 {
-  $cleanCommand = $conn->prepare("update slaves set slaveCommand='' where slaveId=?");
+  $cleanCommand = $conn->prepare("update slaves set slaveCommand='', slaveLatestAction=NOW() where slaveId=?");
   if ($cleanCommand !== false)
   {
       $errorControl = $cleanCommand->bind_param("s", $str);
@@ -46,8 +46,8 @@ function showCommand($str, $conn)
                     {
                         $retrieveCommand->bind_result($slaveCommand);
                         $retrieveCommand->fetch();
-                        return $slaveCommand;
                         cleanSlaveCommand($str, $conn);
+			return $slaveCommand;
                     }
                 }
             }

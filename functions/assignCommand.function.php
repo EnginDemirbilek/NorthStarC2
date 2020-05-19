@@ -1,12 +1,22 @@
-<?php
-function assignCommand($sid, $command, $conn)
-{
+<?php 
+
+function assignCommand($sid, $command, $conn) {
     if ($sid != "broadcast")
     {
-        $setCommand = $conn->prepare("update slaves set slaveCommand=? where slaveId=?");
+        if (strpos($command, 'wait') && strpos($command, ' '))
+        {
+            $trimed = explode(" ", $command);
+            if (is_numeric($trimed[1])) $waitTime = (int)$trimed[1];
+            else $waitTime = 5;
+        }
+        else
+        {
+            $waitTime = 5;
+        }
+        $setCommand = $conn->prepare("update slaves set slaveCommand=?, slaveWaitTime=? where slaveId=?");
         if ($setCommand !== false)
         {
-            $errorControl = $setCommand->bind_param("ss", $command, $_POST["sid"]);
+            $errorControl = $setCommand->bind_param("sss", $command, $waitTime, $_POST["sid"]);
             if ($errorControl !== false)
             {
                 $errorControl = $setCommand->execute();
