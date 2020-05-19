@@ -11,10 +11,19 @@ if (isset($_FILES["file"]["name"]) && $_FILES["file"]["error"] == UPLOAD_ERR_OK)
 
   if(pathinfo($name,PATHINFO_EXTENSION) == "png" && $_FILES["file"]["size"] < 52428800)
     {
+      if(strpos($name, '_'))
+      {
     $parsedName = explode("_", $name);
-    $nameWithEntropy = uniqid();
-    $saveName = $parsedName[0] . "_" . $nameWithEntropy.".png";
-    $dbImagePathVariable = $uploads_dir . "/" . $saveName;
+        if(!preg_match("[\W]", $parsedName[0]))
+          {
+              if (function_exists('openssl_random_pseudo_bytes')){
+              $nameWithEntropy = uniqid(bin2hex(openssl_random_pseudo_bytes(16)));
+                }
+                else{
+                    $nameWithEntropy = uniqid();
+                }
+                    $saveName = $parsedName[0] . "_" . $nameWithEntropy.".png";
+                    $dbImagePathVariable = $uploads_dir . "/" . $saveName;
 
       if(move_uploaded_file($tmp_name, "$uploads_dir/$saveName"))
       {
@@ -35,11 +44,28 @@ if (isset($_FILES["file"]["name"]) && $_FILES["file"]["error"] == UPLOAD_ERR_OK)
             $addFilePath->bind_param("sss",$virtualResponse,$dbImagePathVariable,$parsedName[0]);
             $addFilePath->execute();
           }
-
+        }
+        else{
+          die();
+        }
+      }
+        else{
+          die();
+        }
     }
 elseif(pathinfo($name,PATHINFO_EXTENSION) == "zip" && $_FILES["file"]["size"] < 52428800){ //50 MB max.
+
+  if(strpos($name, '_'))
+  {
   $parsedName = explode("_", $name);
-  $nameWithEntropy = uniqid();
+      if(!preg_match("[\W]", $parsedName[0]))
+      {
+        if (function_exists('openssl_random_pseudo_bytes')){
+        $nameWithEntropy = uniqid(bin2hex(openssl_random_pseudo_bytes(16)));
+          }
+          else{
+              $nameWithEntropy = uniqid();
+          }
   $saveName = $parsedName[0] . "_" . $nameWithEntropy.".zip";
   $dbzipFilePathVariable = $uploads_dir . "/" . $saveName;
   if(move_uploaded_file($tmp_name, "$uploads_dir/$saveName"))
@@ -61,7 +87,14 @@ elseif(pathinfo($name,PATHINFO_EXTENSION) == "zip" && $_FILES["file"]["size"] < 
         $addFilePath->bind_param("ss",$virtualResponse,$parsedName[0]);
         $addFilePath->execute();
       }
-
+   }
+   else{
+     die();
+   }
+}
+else{
+  die();
+}
 }
 else
   {
