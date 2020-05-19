@@ -6,9 +6,6 @@ NorthStarC2 is an open-source command and control framework developed for penetr
 <br>
 NorthStar C2 Framework consists of two applications, a server-side GUI web application for managing sessions and a client-side stager to communicate with C2 server.
 
-## Contributors
-During the development process these guys spent their hours on this project: [Selçuk Demir](https://github.com/s3lcuk) and [Hasan Ekin Dumanoğulları](https://www.linkedin.com/in/hekindmn/).
-
 # Quick Installation
 
  `git clone https://github.com/EnginDemirbilek/NorthStarC2.git`
@@ -56,6 +53,8 @@ Currently, server-side application has the following functions:
 
 - User-Friendly GUI with everything needed to manage sessions opened by the stager.
 
+## Contributors
+During the development process these guys spent their hours on this project: [Selçuk Demir](https://github.com/s3lcuk) and [Hasan Ekin Dumanoğulları](https://www.linkedin.com/in/hekindmn/).
 
 # GUI Preview
 
@@ -68,7 +67,6 @@ Currently, server-side application has the following functions:
 <br>
 <br>
 ![alt text](https://github.com/EnginDemirbilek/NorthStarC2/blob/master/ss/ss6.PNG)
-
 
 
 # Acknowledgements
