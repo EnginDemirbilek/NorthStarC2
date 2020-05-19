@@ -3,7 +3,7 @@
 // Configure Database Connection
 $servername = "localhost";
 $username = "USERNAMEHERE";
-$password = "PASSWODHERE";
+$password = "PASSWORDHERE";
 $dbname = "DBHERE";
 $conn = new mysqli($servername, $username, $password, $dbname);
 
