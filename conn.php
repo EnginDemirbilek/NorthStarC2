@@ -2,9 +2,9 @@
 
 // Configure Database Connection
 $servername = "localhost";
-$username = "root";
-$password = "north5323";
-$dbname = "northstar";
+$username = "USERHERE";
+$password = "PASSWORDHERE";
+$dbname = "DBNAMEHERE";
 $conn = new mysqli($servername, $username, $password, $dbname);
 
 // Check connection
