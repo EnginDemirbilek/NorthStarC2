@@ -54,7 +54,9 @@ Currently, server-side application has the following functions:
 - User-Friendly GUI with everything needed to manage sessions opened by the stager.
 
 ## Contributors
-During the development process these guys spent their hours on this project: [Selçuk Demir](https://github.com/s3lcuk) and [Hasan Ekin Dumanoğulları](https://www.linkedin.com/in/hekindmn/).
+During the development process these guys spent hours on this project:
+<br>
+[Selçuk Demir](https://github.com/s3lcuk) and [Hasan Ekin Dumanoğulları](https://www.linkedin.com/in/hekindmn/).
 
 # GUI Preview
 
