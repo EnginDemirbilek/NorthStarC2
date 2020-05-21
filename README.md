@@ -93,6 +93,6 @@ For inspiration:
 [Boğaziçi University Management Information Systems Cyber Security Center](https://siber.boun.edu.tr/en)
 
 
-[Prof. DR. Refik SAMET] (http://cv.ankara.edu.tr/samet@eng.ankara.edu.tr)
+[Prof. DR. Refik SAMET](http://cv.ankara.edu.tr/samet@eng.ankara.edu.tr)
 
  
