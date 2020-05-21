@@ -74,6 +74,10 @@ During the development process these guys spent hours on this project:
 # Acknowledgements
 
 
+[Prof. DR. Refik SAMET](http://cv.ankara.edu.tr/samet@eng.ankara.edu.tr)
+
+
+
 For theme : [RuangAdmin](https://github.com/indrijunanda/RuangAdmin)
 
 
@@ -93,6 +97,5 @@ For inspiration:
 [Boğaziçi University Management Information Systems Cyber Security Center](https://siber.boun.edu.tr/en)
 
 
-[Prof. DR. Refik SAMET](http://cv.ankara.edu.tr/samet@eng.ankara.edu.tr)
 
  
