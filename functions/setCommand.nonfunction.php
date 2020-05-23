@@ -1,6 +1,6 @@
 <?php
-include '../session.php';
-include '../conn.php';
+include $_SERVER["DOCUMENT_ROOT"] . "/session.php";
+include $_SERVER["DOCUMENT_ROOT"]. "/conn.php";
 include 'assignCommand.function.php';
 include 'uploadFile.function.php';
 
@@ -34,6 +34,9 @@ else if (isset($_FILES["fileToUpload"]) && $_FILES["fileToUpload"]["error"] == U
         echo '<script>document.getElementById("resultTextarea").value=' . '"Upload command sended. Waiting for response";'. '</script>';
 	echo "<script>isCommandSended=true;";
 	echo "retrieveResponse();</script>";
+    }
+   else{
+ echo '<script>document.getElementById("resultTextarea").value=' . $returnVal . '</script>';
 	}
   }
 }

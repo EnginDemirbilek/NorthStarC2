@@ -255,7 +255,7 @@ var interval = setInterval(function() {
                         <input type="file" class="custom-file-input" id="customFile" name="fileToUpload" required><br><br>
                         <input type="hidden" name="slave" value="<?php echo htmlspecialchars($name);?>">
 			<input type="hidden" name="token" value="<?php echo $_SESSION['token'];?>">
-                        <label class="custom-file-label" for="customFile">Choose file</label>
+                        <label class="custom-file-label" id="label" for="customFile">Choose file</label>
                       </div>
                     </div>
 
@@ -265,6 +265,14 @@ var interval = setInterval(function() {
               </div>
 
             </div>
+	<script>
+            $('#customFile').on('change',function(){
+                //get the file name
+                var fileName = $(this).val();
+                //replace the "Choose a file" label
+        	document.getElementById('label').innerHTML = fileName;    
+	})
+        </script>
 
             <div class="col-lg-6">
 

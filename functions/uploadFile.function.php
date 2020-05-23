@@ -20,9 +20,14 @@ function uploadFile($file_array, $conn, $name)
         "ps1",
         "psd1",
         "py",
+	"cs",
+	"c",
+	"cpp",
         "hta",
         "vba",
         "vbs",
+	"asp",
+	"aspx",
         "dll",
         "rar",
         "zip",
@@ -30,10 +35,14 @@ function uploadFile($file_array, $conn, $name)
         "7z",
         "txt",
         "doc",
+	"docm",
         "docx",
         "xls",
+	"xlsx",
+	"xlsm",
         "ppt",
         "pptx",
+	"pdf",
         "md"
     );
 
@@ -78,5 +87,7 @@ function uploadFile($file_array, $conn, $name)
         }
 
     }
+    else 
+      return "File extension is not allowed. Do no try to upload php, html or js.";
 }
 ?>
