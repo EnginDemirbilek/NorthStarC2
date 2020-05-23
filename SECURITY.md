@@ -2,7 +2,7 @@
 
 ## Supported Versions
 
-Current supported of NorthStar C2 Framework is v1.0
+Current supported version of NorthStar C2 Framework is v1.0
 
 | Version | Supported          |
 | ------- | ------------------ |
