@@ -1,7 +1,7 @@
 # ![](banner.png)
 ![GPL 3.0](https://img.shields.io/badge/license-GPLv3-red.svg)
 <br>
-NorthStarC2 is an open-source command and control framework developed for penetration testing and red teaming purposes by [Engin Demirbilek](https://twitter.com/Nginthenoob), a senior majoring in Computer Engineering at Ankara University Faculty of Engineering. 
+NorthStarC2 is an open-source command and control framework developed for penetration testing and red teaming purposes by [Engin Demirbilek](https://twitter.com/Nginthenoob), in Computer Engineering at Ankara University Faculty of Engineering under consultancy of [Prof. DR. Refik SAMET](http://cv.ankara.edu.tr/samet@eng.ankara.edu.tr). 
 <br>
 <br>
 NorthStar C2 Framework consists of two applications, a server-side GUI web application for managing sessions and a client-side stager to communicate with C2 server.
@@ -72,10 +72,6 @@ During the development process these guys spent hours on this project:
 
 
 # Acknowledgements
-
-
-[Prof. DR. Refik SAMET](http://cv.ankara.edu.tr/samet@eng.ankara.edu.tr)
-
 
 
 For theme : [RuangAdmin](https://github.com/indrijunanda/RuangAdmin)
