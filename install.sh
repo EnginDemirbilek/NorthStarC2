@@ -2,14 +2,12 @@
 
 banner() {
     cat <<"NS"
-  _   _            _   _      _____ _               _____           _           _   
- | \ | |          | | | |    / ____| |             |  __ \         (_)         | |  
- |  \| | ___  _ __| |_| |__ | (___ | |_ __ _ _ __  | |__) | __ ___  _  ___  ___| |_ 
- | . ` |/ _ \| '__| __| '_ \ \___ \| __/ _` | '__| |  ___/ '__/ _ \| |/ _ \/ __| __|
- | |\  | (_) | |  | |_| | | |____) | || (_| | |    | |   | | | (_) | |  __/ (__| |_ 
- |_| \_|\___/|_|   \__|_| |_|_____/ \__\__,_|_|    |_|   |_|  \___/| |\___|\___|\__|
-                                                                  _/ |              
-                                                                 |__/               
+  _   _            _   _      _____ _              _____ ___  
+ | \ | |          | | | |    / ____| |            / ____|__ \ 
+ |  \| | ___  _ __| |_| |__ | (___ | |_ __ _ _ __| |       ) |
+ | . ` |/ _ \| '__| __| '_ \ \___ \| __/ _` | '__| |      / / 
+ | |\  | (_) | |  | |_| | | |____) | || (_| | |  | |____ / /_ 
+ |_| \_|\___/|_|   \__|_| |_|_____/ \__\__,_|_|   \_____|____|
 NS
 }
 
@@ -53,7 +51,7 @@ installPackages() {
 configure() {
     clear
     banner
-    echo -e "\n[✓] Packages installed."
+    echo -e "\n[✓] Packages are installed.\n"
     sleep 1
     echo -e "\n[!] This script will remove all files in /var/www/html/ on your system.\n"
     read -p "    Are you willing to continue? (y/n): " RMRF
@@ -91,11 +89,14 @@ QUERY
     cp -r * /var/www/html/
     chown -R www-data:www-data /var/www/html/
     echo -e "\n[mysqld]\nbind-address = 127.0.0.1\nskip-networking" >>/etc/mysql/my.cnf
+    sed -i 's/Options Indexes FollowSymLinks/Options -Indexes/' /etc/apache2/apache2.conf
     systemctl restart mysql
     systemctl restart apache2
     systemctl enable mysql > /dev/null 2>&1
     systemctl enable apache2 > /dev/null 2>&1
-    echo -e "[✓] Installation completed.\n"
+    clear
+    banner
+    echo -e "\n[✓] Installation completed.\n"
     sleep 1
     echo -e "[*] You can login and start using your panel at: 127.0.0.1/getin.php\n"
     sleep 1
