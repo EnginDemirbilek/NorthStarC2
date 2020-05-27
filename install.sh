@@ -2,14 +2,14 @@
 
 banner() {
     cat <<"NS"
-
-  _   _            _   _      _____ _              _____ ___  
- | \ | |          | | | |    / ____| |            / ____|__ \ 
- |  \| | ___  _ __| |_| |__ | (___ | |_ __ _ _ __| |       ) |
- | . ` |/ _ \| '__| __| '_ \ \___ \| __/ _` | '__| |      / / 
- | |\  | (_) | |  | |_| | | |____) | || (_| | |  | |____ / /_ 
- |_| \_|\___/|_|   \__|_| |_|_____/ \__\__,_|_|   \_____|____|
-
+  _   _            _   _      _____ _               _____           _           _   
+ | \ | |          | | | |    / ____| |             |  __ \         (_)         | |  
+ |  \| | ___  _ __| |_| |__ | (___ | |_ __ _ _ __  | |__) | __ ___  _  ___  ___| |_ 
+ | . ` |/ _ \| '__| __| '_ \ \___ \| __/ _` | '__| |  ___/ '__/ _ \| |/ _ \/ __| __|
+ | |\  | (_) | |  | |_| | | |____) | || (_| | |    | |   | | | (_) | |  __/ (__| |_ 
+ |_| \_|\___/|_|   \__|_| |_|_____/ \__\__,_|_|    |_|   |_|  \___/| |\___|\___|\__|
+                                                                  _/ |              
+                                                                 |__/               
 NS
 }
 
@@ -53,9 +53,15 @@ installPackages() {
 configure() {
     clear
     banner
-    echo -e "\n[✓] Packages are installed.\n"
+    echo -e "\n[✓] Packages installed."
     sleep 1
-    echo -e "[*] Please insert configuration data:\n"
+    echo -e "\n[!] This script will remove all files in /var/www/html/ on your system.\n"
+    read -p "    Are you willing to continue? (y/n): " RMRF
+    if [ "$RMRF" != "y" ]; then
+        echo -e "\n[*] Exiting.\n"
+        exit
+    fi
+    echo -e "\n[*] Please insert configuration data:\n"
     TTY=$(/usr/bin/tty)
     read -p "       Database Name       : " NSDBNAME < $TTY
     read -p "       Mysql Root Password : " NSDBPASS < $TTY
@@ -85,14 +91,11 @@ QUERY
     cp -r * /var/www/html/
     chown -R www-data:www-data /var/www/html/
     echo -e "\n[mysqld]\nbind-address = 127.0.0.1\nskip-networking" >>/etc/mysql/my.cnf
-    sed -i 's/Options Indexes FollowSymLinks/Options -Indexes/' /etc/apache2/apache2.conf
     systemctl restart mysql
     systemctl restart apache2
     systemctl enable mysql > /dev/null 2>&1
     systemctl enable apache2 > /dev/null 2>&1
-    clear
-    banner
-    echo -e "\n[✓] Installation completed.\n"
+    echo -e "[✓] Installation completed.\n"
     sleep 1
     echo -e "[*] You can login and start using your panel at: 127.0.0.1/getin.php\n"
     sleep 1
