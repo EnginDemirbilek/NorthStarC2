@@ -8,6 +8,7 @@ banner() {
  | . ` |/ _ \| '__| __| '_ \ \___ \| __/ _` | '__| |      / / 
  | |\  | (_) | |  | |_| | | |____) | || (_| | |  | |____ / /_ 
  |_| \_|\___/|_|   \__|_| |_|_____/ \__\__,_|_|   \_____|____|
+ 
 NS
 }
 
@@ -51,7 +52,7 @@ installPackages() {
 configure() {
     clear
     banner
-    echo -e "\n[✓] Packages are installed.\n"
+    echo -e "\n[✓] Packages are installed."
     sleep 1
     echo -e "\n[!] This script will remove all files in /var/www/html/ on your system.\n"
     read -p "    Are you willing to continue? (y/n): " RMRF
