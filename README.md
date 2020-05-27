@@ -56,7 +56,7 @@ Currently, server-side application has the following functions:
 ## Contributors
 During the development process these guys spent hours on this project:
 <br>
-[Selçuk Demir](https://github.com/s3lcuk) and [Hasan Ekin Dumanoğulları](https://www.linkedin.com/in/hekindmn/).
+[Selçuk Demir](https://twitter.com/s3ljuk) and [Hasan Ekin Dumanoğulları](https://www.linkedin.com/in/hekindmn/).
 
 # GUI Preview
 
