@@ -63,9 +63,10 @@ configure() {
     echo -e "\n[*] Please insert configuration data:\n"
     TTY=$(/usr/bin/tty)
     read -p "       Database Name       : " NSDBNAME < $TTY
-    read -p "       Mysql Root Password : " NSDBPASS < $TTY
+    read -s -p "       Mysql Root Password : " NSDBPASS < $TTY
+    echo ""
     read -p "       Web Panel Username  : " NSPANELUSER < $TTY
-    read -p "       Web Panel Password  : " NSPANELPASS < $TTY
+    read -s -p "       Web Panel Password  : " NSPANELPASS < $TTY
     echo -e "\n[*] Configuration is ongoing, please wait.\n"
     sed -i '5 s/ = ".*/ = "'"root"'";/' conn.php
     sed -i '6 s/ = ".*/ = "'"$NSDBPASS"'";/' conn.php
